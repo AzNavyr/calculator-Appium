@@ -17,8 +17,10 @@ public class AppiumTest {
     public void setUp() throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("appium:deviceName", "TestEmulator");
-        desiredCapabilities.setCapability("appium:app", "C:\\Users\\User\\AndroidStudioProjects\\mqa-homeworks\\2.2 UI Automator\\sample\\app\\build\\outputs\\apk\\debug\\app-debug.apk");
+        desiredCapabilities.setCapability("appium:deviceName", "Some name");
+        desiredCapabilities.setCapability("appium:automationName", "UiAutomator2");
+        desiredCapabilities.setCapability("appium:appPackage", "ru.netology.testing.uiautomator");
+        desiredCapabilities.setCapability("appium:appActivity", "ru.netology.testing.uiautomator.MainActivity");
         desiredCapabilities.setCapability("appium:ensureWebviewsHavePages", true);
         desiredCapabilities.setCapability("appium:nativeWebScreenshot", true);
         desiredCapabilities.setCapability("appium:newCommandTimeout", 3600);
@@ -30,14 +32,15 @@ public class AppiumTest {
     }
 
     @Test
-    public void checkEmptyInput() {
+    public void setEmptyTextTest() {
+        MobileElement expected = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/textToBeChanged");
         MobileElement inputField = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
         inputField.sendKeys("  ");
         MobileElement buttonChange = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
         buttonChange.click();
         MobileElement textToBeChanged = (MobileElement) driver.findElementById("textToBeChanged");
 
-        Assertions.assertEquals("Hello UiAutomator!", textToBeChanged.getText());
+        Assertions.assertEquals(expected.getText(), textToBeChanged.getText());
     }
 
     @Test
