@@ -30,15 +30,14 @@ public class AppiumTest {
     }
 
     @Test
-    public void setEmptyTextTest() {
-        MobileElement el1 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/textToBeChanged");
-        el1.getText();
-        MobileElement el3 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
-        el3.setValue(" ");
-        MobileElement el2 = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
-        el2.click();
+    public void checkEmptyInput() {
+        MobileElement inputField = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/userInput");
+        inputField.sendKeys("  ");
+        MobileElement buttonChange = (MobileElement) driver.findElementById("ru.netology.testing.uiautomator:id/buttonChange");
+        buttonChange.click();
+        MobileElement textToBeChanged = (MobileElement) driver.findElementById("textToBeChanged");
 
-        Assertions.assertEquals( "Hello UiAutomator!", el1.getText());
+        Assertions.assertEquals("Hello UiAutomator!", textToBeChanged.getText());
     }
 
     @Test
